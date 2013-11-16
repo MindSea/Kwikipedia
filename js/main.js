@@ -9,10 +9,20 @@ wikiModule.config(function($locationProvider, $routeProvider) {
 	});
 });
 
-wikiModule.controller('wikiController', function($scope) {
+wikiModule.factory('Page', function() {
+	var title = 'Kwikipedia';
 	
+	return {
+		title: function() { return title; },
+		setTitle: function(newTitle) { title = 'Kwikipedia - ' + newTitle; }
+	};
 });
 
-wikiModule.controller('contentController', function($scope, $routeParams) {
+wikiModule.controller('wikiController', function($scope, Page) {
+	$scope.Page = Page;
+});
+
+wikiModule.controller('contentController', function($scope, $routeParams, Page) {
 	$scope.slug = $routeParams.slug;
+	Page.setTitle($routeParams.slug);
 });

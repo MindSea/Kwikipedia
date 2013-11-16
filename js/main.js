@@ -23,6 +23,17 @@ wikiModule.controller('wikiController', function($scope, Page) {
 });
 
 wikiModule.controller('contentController', function($scope, $routeParams, Page) {
-	$scope.slug = $routeParams.slug;
-	Page.setTitle($routeParams.slug);
+	var slug = $routeParams.slug;
+	$scope.slug = slug;
+	
+	var slugToTitle = function(slug) {
+		return slug.replace(/_/g, ' ');
+	};
+	
+	if (slug === '' || slug === undefined) {
+		Page.setTitle('Main Page');
+		slug = 'Main_Page';
+	} else {
+		Page.setTitle(slugToTitle(slug));
+	}
 });

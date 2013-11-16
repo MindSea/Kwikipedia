@@ -43,5 +43,9 @@ wikiModule.controller('contentController', function($scope, $routeParams, Page) 
 		Page.setTitle(slugToTitle(slug));
 	}
 	
+	$scope.updateData = function() {
+		$scope.data[slug] = angular.element(document.querySelector('#content')).html();
+	};
+	
 	$scope.content = $scope.data[slug];
 });

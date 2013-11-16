@@ -11,12 +11,11 @@
 	</head>
 	<body>
 		<div id="root">
-			<ul ng-repeat='item in list'>
-				<li style="color: {{ item.color }}">{{ item.text }}</li>
-			</ul>
+			<div ng-view></div>
 		</div>
 		
 		<script src="js/angular.min.js"></script>
+		<script src="js/angular-route.min.js"></script>
 		<script src="js/main.js"></script>
 	</body>
 </html>

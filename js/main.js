@@ -36,6 +36,10 @@ wikiModule.controller('contentController', function($scope, $routeParams, Page) 
 		return slug.replace(/_/g, ' ');
 	};
 	
+	var titleToSlug = function(title) {
+		return title.replace(/\s+/g, '_').replace(/[~`!@#$%\^&*()-+={}\[\]\.,\\\/\?"':;|]/g, '');
+	};
+	
 	if (slug === '' || slug === undefined) {
 		Page.setTitle('Main Page');
 		slug = 'Main_Page';
@@ -45,6 +49,14 @@ wikiModule.controller('contentController', function($scope, $routeParams, Page) 
 	
 	$scope.updateData = function() {
 		$scope.data[slug] = angular.element(document.querySelector('#content')).html();
+	};
+	
+	$scope.link = function() {
+		var link = document.createElement('a');
+		link.href = '/#/' + titleToSlug(window.getSelection().toString());
+		window.getSelection().getRangeAt(0).surroundContents(link);
+		$scope.updateData();
+		return false;
 	};
 	
 	$scope.content = $scope.data[slug];

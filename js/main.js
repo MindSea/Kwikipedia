@@ -20,6 +20,11 @@ wikiModule.factory('Page', function() {
 
 wikiModule.controller('wikiController', function($scope, Page) {
 	$scope.Page = Page;
+	
+	$scope.data = {
+		'Main_Page': '<p>Welcome to the main page!</p><p>Next try the <a href="/#/foo">foo</a> page!</p>',
+		'foo': 'the foo page'
+	};
 });
 
 wikiModule.controller('contentController', function($scope, $routeParams, Page) {
@@ -36,4 +41,6 @@ wikiModule.controller('contentController', function($scope, $routeParams, Page) 
 	} else {
 		Page.setTitle(slugToTitle(slug));
 	}
+	
+	$scope.content = $scope.data[slug];
 });

@@ -1,7 +1,8 @@
 var wikiModule = angular.module('wiki', ['ngRoute']);
 
-wikiModule.config(function($locationProvider, $routeProvider) {
+wikiModule.config(function($locationProvider, $routeProvider, $sceProvider) {
 	$locationProvider.html5Mode(false); // For ease of demo-ing
+	$sceProvider.enabled(false); // because we're doing crazy things
 	
 	$routeProvider.when('/:slug?', {
 		controller: 'contentController',

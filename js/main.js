@@ -22,15 +22,18 @@ wikiModule.factory('Page', function() {
 wikiModule.controller('wikiController', function($scope, Page) {
 	$scope.Page = Page;
 	
-	$scope.data = {
-		'Main_Page': '<p>Welcome to the main page!</p><p>Next try the <a href="/#/foo">foo</a> page!</p>',
-		'foo': 'the foo page'
-	};
+	if (localStorage.getItem('data') !== null) {
+		$scope.data = JSON.parse(localStorage.getItem('data'));
+	} else {
+		$scope.data = {
+			'Main_Page': '<p>Welcome to the main page!</p><p>Next try the <a href="/#/foo">foo</a> page!</p>',
+			'foo': 'the foo page'
+		};
+	}
 });
 
 wikiModule.controller('contentController', function($scope, $routeParams, Page) {
 	var slug = $routeParams.slug;
-	$scope.slug = slug;
 	
 	var slugToTitle = function(slug) {
 		return slug.replace(/_/g, ' ');
@@ -57,6 +60,10 @@ wikiModule.controller('contentController', function($scope, $routeParams, Page) 
 		window.getSelection().getRangeAt(0).surroundContents(link);
 		$scope.updateData();
 		return false;
+	};
+	
+	$scope.save = function() {
+		localStorage.setItem('data', JSON.stringify($scope.data));
 	};
 	
 	$scope.content = $scope.data[slug];

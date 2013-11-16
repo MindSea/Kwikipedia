@@ -11,8 +11,9 @@
 	</head>
 	<body>
 		<div id="root">
-			<h1>{{ message }}</h1>
-			<input ng-model="message"><!-- New! -->
+			<ul ng-repeat='item in list'>
+				<li style="color: {{ item.color }}">{{ item.text }}</li>
+			</ul>
 		</div>
 		
 		<script src="js/angular.min.js"></script>
